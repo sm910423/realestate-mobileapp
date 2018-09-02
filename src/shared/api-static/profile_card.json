@@ -1,0 +1,11 @@
+{
+  "data": {
+    "id": 3434,
+    "name": "ABC",
+    "lat": 0.23232,
+    "lng": 34.34433,
+    "score": 90,
+    "cover_src": "http://via.placeholder.com/350x150"
+  },
+  "status": "ok"
+}

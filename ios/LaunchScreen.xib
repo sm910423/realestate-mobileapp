@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="vwj-3n-ONi">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app_icon" translatesAutoresizingMaskIntoConstraints="NO" id="20R-Er-IyI">
+                    <rect key="frame" x="136" y="136" width="103" height="62"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="62" id="5xb-Iv-QtU"/>
+                        <constraint firstAttribute="width" constant="103" id="VcW-Wb-CnO"/>
+                    </constraints>
+                </imageView>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="YEOMAN" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="pF1-Ds-bRd">
+                    <rect key="frame" x="67" y="238" width="240" height="64"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="48"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="20R-Er-IyI" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="116" id="Bgw-q0-lhO"/>
+                <constraint firstItem="pF1-Ds-bRd" firstAttribute="top" secondItem="20R-Er-IyI" secondAttribute="bottom" constant="40" id="DHH-da-tiI"/>
+                <constraint firstItem="vwj-3n-ONi" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="EHv-oz-tck"/>
+                <constraint firstItem="vwj-3n-ONi" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="FOw-1Q-jHG"/>
+                <constraint firstItem="pF1-Ds-bRd" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="67" id="Hh3-hO-gEg"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="pF1-Ds-bRd" secondAttribute="trailing" constant="68" id="Usg-Ne-sAT"/>
+                <constraint firstItem="vwj-3n-ONi" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="aiF-3o-bLH"/>
+                <constraint firstItem="20R-Er-IyI" firstAttribute="centerX" secondItem="vwj-3n-ONi" secondAttribute="centerX" id="bvg-QL-Dek"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="pF1-Ds-bRd" secondAttribute="bottom" constant="365" id="du1-Xe-GDH"/>
+                <constraint firstItem="vwj-3n-ONi" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="p0e-jd-Dk0"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="24.5" y="51.5"/>
+        </view>
+        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="N2s-OD-gQb">
+            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+        </imageView>
+    </objects>
+    <resources>
+        <image name="app_icon" width="120" height="120"/>
+        <image name="splash" width="375" height="667"/>
+    </resources>
+</document>

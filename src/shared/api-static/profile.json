@@ -1,0 +1,52 @@
+{
+  "data": {
+    "id": "105",
+    "avatar": "https:\/\/image.freepik.com\/free-vector\/abstract-logo-in-flame-shape_1043-44.jpg",
+    "name": "The Test Profile",
+    "map": {
+      "lat": 51.334879,
+      "lng": 1.471572
+    },
+    "score": 79.6,
+    "address": "50 Main Rd, London, UK",
+    "url": "http:\/\/www.google.co.uk\/",
+    "hours": "Monday: 11:00 AM \u2013 11:00 PM<br>Tuesday: 11:00 AM \u2013 11:00 PM<br>Wednesday: 11:00 AM \u2013 12:00 AM<br>Thursday: 11:00 AM \u2013 12:00 AM<br>Friday: 11:00 AM \u2013 2:00 AM<br>Saturday: 11:00 AM \u2013 2:00 AM<br>Sunday: 12:00 \u2013 11:00 PM",
+    "phone": "+44 1245 256752",
+    "theme": [
+      "fafafa",
+      "00000a"
+    ],
+    "extra": [
+      {
+        "value": "attribute 1 value"
+      },
+      {
+        "value": "attribute 2 value"
+      },
+      {
+        "value": "attribute 3 value"
+      }
+    ],
+    "categoryName": "Social - Bars<br>Social - Food and Dining - Restaurants",
+    "categoryImage": "http:\/\/lakelurelogcabinrental.com\/wp-content\/uploads\/2014\/03\/iconmonstr-beer-3-icon-128.png",
+
+
+    "images": [
+      {
+        "image_url": "https:\/\/image.freepik.com\/free-vector\/abstract-logo-in-flame-shape_1043-44.jpg",
+      },
+      {
+        "image_url": "https:\/\/image.freepik.com\/free-vector\/abstract-logo-in-flame-shape_1043-44.jpg",
+      }
+    ],
+    "cover_src": "http://via.placeholder.com/350x150",
+    "place_keywords": [
+      "place_keywords 1",
+      "place_keywords 2",
+      "place_keywords 3",
+      "place_keywords 4",
+      "place_keywords 5"
+    ]
+  },
+  "status": "ok"
+}

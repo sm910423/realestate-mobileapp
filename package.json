@@ -1,0 +1,39 @@
+{
+  "name": "YeomanApp",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "react": "16.2.0",
+    "react-actioncable-provider": "^1.0.3",
+    "react-native": "0.53.3",
+    "react-native-actioncable": "0.0.3",
+    "react-native-document-picker": "^2.1.0",
+    "react-native-drawer": "^2.5.0",
+    "react-native-gifted-chat": "^0.3.0",
+    "react-native-gravatar": "^1.0.2",
+    "react-native-infinite-scroll": "^1.0.6",
+    "react-native-paper": "^1.0.0",
+    "react-native-splash-screen": "^3.1.1",
+    "react-native-vector-icons": "^4.6.0",
+    "react-navigation": "^1.1.2",
+    "react-navigation-redux-helpers": "^1.0.1",
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0"
+  },
+  "devDependencies": {
+    "babel-jest": "22.4.1",
+    "babel-preset-react-native": "4.0.0",
+    "jest": "22.4.2",
+    "react-test-renderer": "16.2.0"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
