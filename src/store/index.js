@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import navReducer from "./navReducer";
 import appReducer from "./appReducer";
+
 const reducer = combineReducers({
   nav: navReducer,
   app: appReducer

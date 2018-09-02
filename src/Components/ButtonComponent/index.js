@@ -5,7 +5,7 @@ import { sharedStyles } from "../../shared/styles";
 
 const ButtonComponent = (props) => {
   return (
-    <TouchableOpacity onPress={props.onPress} style={[styles.containerStyle, styles.shadowStyle,  sharedStyles.centeredContent]}>
+    <TouchableOpacity onPress={props.onPress} disabled={ props.disabled } style={[styles.containerStyle, styles.shadowStyle,  sharedStyles.centeredContent]}>
       <Text style={styles.textStyle}>{props.text}</Text>
     </TouchableOpacity>
   );

@@ -1,15 +1,18 @@
 import React, { Component } from "react";
-import {
-  Platform,
-  View,
-  TouchableOpacity,
-  AlertIOS,
-  ToastAndroid
-} from "react-native";
-import { Paper, Text, TextInput, Button, withTheme } from "react-native-paper";
+import { Platform, ScrollView, View, TouchableOpacity } from "react-native";
+import { Text, withTheme } from "react-native-paper";
+import FacebookButtonComponent from "../../Components/FacebookButtonComponent";
+import GoogleButtonComponent from "../../Components/GoogleButtonComponent";
+import ButtonComponent from "../../Components/ButtonComponent";
+import RoundTextInputComponent from "../../Components/RoundTextInputComponent";
 
-import { sharedStyles } from "../../shared/styles";
-import * as Api from "../../config/api";
+import { connect } from "react-redux";
+
+import { signupAction } from "./../../store/actions";
+
+import { sharedStyles, blueColor } from "../../shared/styles";
+import styles from "./styles";
+
 
 class RegisterScreen extends Component {
   static navigationOptions = {
@@ -19,119 +22,75 @@ class RegisterScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
+      firstname: "",
+      lastname: "",
       email: "",
       password: "",
-      confirmPassword: "",
-      loading: false
     };
   }
 
   validCredentials = () => {
     return (
-      this.state.name &&
-      this.state.name.length > 0 &&
-      this.state.email &&
-      this.state.email.length > 0 &&
-      this.state.password &&
-      this.state.password.length > 0 &&
-      this.state.confirmPassword &&
-      this.state.confirmPassword.length > 0
+      this.state.firstname && this.state.firstname.length > 0 &&
+      this.state.lastname && this.state.lastname.length > 0 &&
+      this.state.email && this.state.email.length > 0 &&
+      this.state.password && this.state.password.length > 0
     );
   };
 
-  register = () => {
+  registerByEmail = () => {
     if (this.validCredentials()) {
-      this.setState({ loading: true });
-      Api.register(
-        this.state.name,
-        this.state.email,
-        this.state.password,
-        this.state.confirmPassword
-      )
-        .then(values => {
-          this.props.navigation.navigate("Login");
-        })
-        .catch(error => {
-          this.alertUser("Error registering", "Error");
-        })
-        .then(() => this.setState({ loading: false }));
+      this.props.signup({ email: this.state.email, password: this.state.password, firstname: this.state.firstname, lastname: this.state.lastname, method: 'email' });
+      // this.setState({ loadingEmail: true });
+
+      // fb.fbEmailSignup(this.state.email, this.state.password, this.state.firstname, this.state.lastname, (result) => {
+      //   if (result.status === 'success') {
+      //     this.props.navigation.navigate("App");
+      //   } else {
+      //     this.setState({ loadingEmail: false });
+      //     this.alertUser("Error", result.message);
+      //   }
+      // });
     }
   };
 
-  alertUser = (message, iosTitle) => {
-    if (Platform.OS === "ios") {
-      AlertIOS.alert(iosTitle, message);
-    } else {
-      ToastAndroid.show(message, ToastAndroid.SHORT);
-    }
-  };
+  registerByFacebook = () => {
+    console.log("click facebook button");
+    this.props.signup({method: 'facebook'});
+  }
+
+  registerByGoogle = () => {
+    console.log("click google button");
+    this.props.signup({method: 'google'});
+  }
 
   render() {
-    const { colors } = this.props.theme;
     return (
-      <View
-        style={[
-          sharedStyles.container,
-          sharedStyles.columnContainer,
-          sharedStyles.centeredContent,
-          sharedStyles.flexOne
-        ]}
-      >
-        <View style={sharedStyles.rowContainer}>
-          <Paper style={sharedStyles.paperContainer}>
-            <Text style={[{ color: colors.primary }, sharedStyles.title]}>
-              Sign Up
-            </Text>
-            <TextInput
-              label="Name"
-              value={this.state.name}
-              placeholder="Name"
-              onChangeText={text => this.setState({ name: text })}
-            />
-            <TextInput
-              label="Email"
-              value={this.state.email}
-              placeholder="Email"
-              onChangeText={text => this.setState({ email: text })}
-            />
-            <TextInput
-              label="Password"
-              value={this.state.password}
-              placeholder="Password"
-              onChangeText={text => this.setState({ password: text })}
-              secureTextEntry={true}
-            />
-            <TextInput
-              label="Confirm Password"
-              value={this.state.confirmPassword}
-              placeholder="Confirm Password"
-              onChangeText={text => this.setState({ confirmPassword: text })}
-              secureTextEntry={true}
-            />
-            <Button
-              raised
-              dark
-              color={colors.primary}
-              style={[sharedStyles.roundedCorners]}
-              onPress={this.register}
-              loading={this.state.loading}
-            >
-              Register
-            </Button>
-            <View
-              style={[
-                sharedStyles.flexOne,
-                sharedStyles.rowContainer,
-                sharedStyles.centeredContent,
-                sharedStyles.paperFooterText
-              ]}
-            >
-              {this.renderFooter()}
-            </View>
-          </Paper>
+      <ScrollView style={[styles.container, sharedStyles.columnContainer, sharedStyles.flexOne]}>
+        <View style={[sharedStyles.columnContainer, sharedStyles.paperContainer]}>
+          <View style={[ sharedStyles.centeredContent, sharedStyles.titleViewStyle ]}>
+            <Text style={[ sharedStyles.titleTextStyle ]}>YEOMAN</Text>
+          </View>
+          <View style={[ sharedStyles.centeredContent, styles.subTitleViewStyle ]}>
+            <Text style={[ styles.subTitleTextStyle ]}>Create new account</Text>
+          </View>
+
+          <RoundTextInputComponent label="First Name" value={this.state.firstname} placeholder="First Name" onChangeText={text => this.setState({ firstname: text })} />
+          <RoundTextInputComponent label="Last Name" value={this.state.lastname} placeholder="Last Name" onChangeText={text => this.setState({ lastname: text })} />
+          <RoundTextInputComponent label="Email" value={this.state.email} placeholder="Email" onChangeText={text => this.setState({ email: text })} />
+          <RoundTextInputComponent label="Password" value={this.state.password} placeholder="Password" secureTextEntry={true} onChangeText={text => this.setState({ password: text })} />
+
+          <View style={{height: 24}} />
+
+          <ButtonComponent text="Sign Up" onPress={ this.registerByEmail.bind(this) } loading={ this.props.loadingEmail } disabled={ this.props.loadingEmail || this.props.loadingGoogle || this.props.loadingFacebook } />
+          <FacebookButtonComponent text="Connect with Facebook" onPress={ this.registerByFacebook.bind(this) } loading={ this.props.loadingGoogle } disabled={ this.props.loadingEmail || this.props.loadingGoogle || this.props.loadingFacebook } />
+          <GoogleButtonComponent text="Connect with Google" onPress={ this.registerByGoogle.bind(this) } loading={ this.props.loadingFacebook } disabled={ this.props.loadingEmail || this.props.loadingGoogle || this.props.loadingFacebook } />
+
+          <View style={[{height: 60, paddingTop: 8}, sharedStyles.rowContainer, sharedStyles.centeredContent, sharedStyles.paperFooterText]}>
+            {this.renderFooter()}
+          </View>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 
@@ -139,29 +98,34 @@ class RegisterScreen extends Component {
     const { colors } = this.props.theme;
     if (Platform.OS === "ios") {
       return (
-        <Text>
+        <Text style={{ fontSize: 16 }}>
           Already have an account?
           <TouchableOpacity
+            disabled={ this.props.loadingEmail || this.props.loadingGoogle || this.props.loadingFacebook }
             style={sharedStyles.footerButton}
             onPress={() => this.props.navigation.navigate("Login")}
           >
-            <Text style={[{ color: colors.primary }]}>Sign In</Text>
+          <View style={[sharedStyles.centeredContent, {borderBottomWidth: 1, borderBottomColor: blueColor}]}>
+            <Text style={{ color: blueColor, fontSize: 16 }}>Sign In</Text>
+          </View>
           </TouchableOpacity>
         </Text>
       );
     } else {
-      return (
-        <View style={[sharedStyles.rowContainer, sharedStyles.flexOne]}>
-          <Text> Already have an account? </Text>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("Login")}
-          >
-            <Text style={[{ color: colors.primary }]}>Sign In</Text>
-          </TouchableOpacity>
-        </View>
-      );
     }
   };
 }
 
-export default withTheme(RegisterScreen);
+const mapStateToProps = state => ({
+  loadingEmail: state.app.loadingEmail,
+  loadingGoogle: state.app.loadingGoogle,
+  loadingFacebook: state.app.loadingFacebook
+})
+
+const mapDispatchToProps = dispatch => ({
+  signup: signupData => {
+    dispatch(signupAction(signupData));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withTheme(RegisterScreen));

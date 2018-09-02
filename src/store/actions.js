@@ -1,20 +1,117 @@
 import axios from "axios";
 import profiles from "./../shared/api-static/home_api.json"
 import { NavigationActions } from "react-navigation";
-import { BASE_URL, setAuthToken } from "./../config/api";
+import { BASE_URL } from "./../config/api";
+
+import * as fb from "../helpers/firebase";
+import * as alert from "../helpers/alert";
 
 // Types
+export const LOGGING_IN_BY_EMAIL = "LOGGING_IN_BY_EMAIL";
+export const LOGGING_IN_BY_FACEBOOK = "LOGGING_IN_BY_FACEBOOK";
+export const LOGGING_IN_BY_GOOGLE = "LOGGING_IN_BY_GOOGLE";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAILURE = "LOGIN_FAILURE";
+export const SAVE_TOKENS = "SAVE_TOKENS";
+
 export const FETCHING_CONTACTS = "FETCH_CONTACTS";
 export const FETCH_CONTACTS_SUCCESS = "FETCH_CONTACTS_SUCCESS";
 export const FETCHING_PROFILES = "FETCH_PROFILES";
 export const FETCH_PROFILES_SUCCESS = "FETCH_PROFILES_SUCCESS";
-export const LOGGING_IN = "LOGGING_IN";
-export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-export const SAVE_TOKENS = "SAVE_TOKENS";
 export const SAVE_GROUPS = "SAVE_GROUPS";
 export const UPDATE_GROUPS = "UPDATE_GROUPS";
 
 // Action creators
+export function loginAction(loginData) {
+  return async function(dispatch) {
+    if (loginData.method === 'email') {
+      dispatch({ type: LOGGING_IN_BY_EMAIL });
+
+      fb.fbEmailLogin(loginData.email, loginData.password, result => {
+        if (result.status === 'success') {
+          dispatch(NavigationActions.navigate({ routeName: "App" }));
+          dispatch({ type: LOGIN_SUCCESS, payload: { email: result.data.user.email, uid: result.data.user.uid } });
+          dispatch({ type: SAVE_TOKENS, payload: { email: result.data.user.email, uid: result.data.user.uid } });
+        } else {
+          dispatch({ type: LOGIN_FAILURE });
+          alert.showErrorMessage(result.message);
+        }
+      });
+    } else if (loginData.method === 'google') {
+      dispatch({ type: LOGGING_IN_BY_GOOGLE });
+
+      fb.fbGoogleLogin(result => {
+        if (result.status === 'success') {
+          dispatch(NavigationActions.navigate({ routeName: "App" }));
+          dispatch({ type: LOGIN_SUCCESS, payload: { email: result.data.user.email, uid: result.data.user.uid } });
+          dispatch({ type: SAVE_TOKENS, payload: { email: result.data.user.email, uid: result.data.user.uid } });
+        } else {
+          dispatch({ type: LOGIN_FAILURE });
+          alert.showErrorMessage(result.message);
+        }
+      });
+    } else if (loginData.method === 'facebook') {
+      dispatch({ type: LOGGING_IN_BY_FACEBOOK });
+
+      fb.fbFacebookLogin(result => {
+        if (result.status === 'success') {
+          dispatch(NavigationActions.navigate({ routeName: "App" }));
+          dispatch({ type: LOGIN_SUCCESS, payload: { email: result.data.user.email, uid: result.data.user.uid } });
+          dispatch({ type: SAVE_TOKENS, payload: { email: result.data.user.email, uid: result.data.user.uid } });
+        } else {
+          dispatch({ type: LOGIN_FAILURE });
+          alert.showErrorMessage(result.message);
+        }
+      });
+    }
+  };
+}
+
+export function signupAction(signupData) {
+  return async function(dispatch) {
+    if (signupData.method === 'email') {
+      dispatch({ type: LOGGING_IN_BY_EMAIL });
+
+      fb.fbEmailSignup(signupData.email, signupData.password, signupData.firstname, signupData.lastname, result => {
+        if (result.status === 'success') {
+          dispatch(NavigationActions.navigate({ routeName: "App" }));
+          dispatch({ type: LOGIN_SUCCESS, payload: { email: result.data.user.email, uid: result.data.user.uid } });
+          dispatch({ type: SAVE_TOKENS, payload: { email: result.data.user.email, uid: result.data.user.uid } });
+        } else {
+          dispatch({ type: LOGIN_FAILURE });
+          alert.showErrorMessage(result.message);
+        }
+      });
+    } else if (signupData.method === 'google') {
+      dispatch({ type: LOGGING_IN_BY_GOOGLE });
+
+      fb.fbGoogleLogin(result => {
+        if (result.status === 'success') {
+          dispatch(NavigationActions.navigate({ routeName: "App" }));
+          dispatch({ type: LOGIN_SUCCESS, payload: { email: result.data.user.email, uid: result.data.user.uid } });
+          dispatch({ type: SAVE_TOKENS, payload: { email: result.data.user.email, uid: result.data.user.uid } });
+        } else {
+          dispatch({ type: LOGIN_FAILURE });
+          alert.showErrorMessage(result.message);
+        }
+      });
+    } else if (signupData.method === 'facebook') {
+      dispatch({ type: LOGGING_IN_BY_FACEBOOK });
+
+      fb.fbFacebookLogin(result => {
+        if (result.status === 'success') {
+          dispatch(NavigationActions.navigate({ routeName: "App" }));
+          dispatch({ type: LOGIN_SUCCESS, payload: { email: result.data.user.email, uid: result.data.user.uid } });
+          dispatch({ type: SAVE_TOKENS, payload: { email: result.data.user.email, uid: result.data.user.uid } });
+        } else {
+          dispatch({ type: LOGIN_FAILURE });
+          alert.showErrorMessage(result.message);
+        }
+      });
+    }
+  };
+}
+
 export function fetchContactsAction() {
   return async function(dispatch) {
     dispatch({ type: FETCHING_CONTACTS });
@@ -38,32 +135,6 @@ export function fetchProfilesAction(page_number) {
     //   .catch(error => console.log(error));
     number_per_page = 4;
     dispatch({ type: FETCH_PROFILES_SUCCESS, payload: profiles.filter(profile => profile.id > page_number * number_per_page && profile.id <= (page_number + 1) * number_per_page) });
-  };
-}
-
-export function loginAction(loginData) {
-  return async function(dispatch) {
-    dispatch({ type: LOGGING_IN });
-    axios
-      .post(`${BASE_URL}/auth/sign_in`, loginData)
-      .then(response => {
-        setAuthToken(
-          response.headers["access-token"],
-          response.headers["client"],
-          response.data.data.uid
-        );
-        dispatch({ type: LOGIN_SUCCESS, payload: response.data.data });
-        dispatch({
-          type: SAVE_TOKENS,
-          payload: {
-            accessToken: response.headers["access-token"],
-            client: response.headers["client"],
-            uid: response.data.data.uid
-          }
-        });
-        dispatch(NavigationActions.navigate({ routeName: "App" }));
-      })
-      .catch(error => console.log(error));
   };
 }
 

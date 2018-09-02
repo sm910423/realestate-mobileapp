@@ -1,31 +1,62 @@
 import {
-  LOGGING_IN,
+  LOGGING_IN_BY_EMAIL,
+  LOGGING_IN_BY_FACEBOOK,
+  LOGGING_IN_BY_GOOGLE,
   LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  SAVE_TOKENS,
   FETCHING_CONTACTS,
   FETCH_CONTACTS_SUCCESS,
   FETCHING_PROFILES,
   FETCH_PROFILES_SUCCESS,
-  SAVE_TOKENS,
   SAVE_GROUPS,
-  UPDATE_GROUPS
+  UPDATE_GROUPS,
 } from "./actions";
 
 const initialState = {
+  loadingEmail: false,
+  loadingFacebook: false,
+  loadingFacebook: false,
+  // accessToken: "",
+  // client: "",
+  email: "",
+  uid: "",
   contacts: [],
   isFetchingContacts: false,
   profiles: [],
   isFetchingProfiles: false,
   isFetchingGroups: true,
-  accessToken: "",
-  client: "",
-  uid: "",
   user: {},
-  groups: []
+  groups: [],
 };
 
 export default function appReducer(state = initialState, action) {
   let newState;
   switch (action.type) {
+    case LOGGING_IN_BY_EMAIL:
+      newState = { ...state, loadingEmail: true}
+      break;
+    case LOGGING_IN_BY_FACEBOOK:
+      newState = { ...state, loadingFacebook: true}
+      break;
+    case LOGGING_IN_BY_GOOGLE:
+      newState = { ...state, loadingGoogle: true}
+      break;
+    case LOGIN_SUCCESS:
+      newState = { ...state, user: action.payload, loadingEmail: false, loadingGoogle: false, loadingFacebook: false };
+      break;
+    case LOGIN_FAILURE:
+      newState = { ...state, loadingEmail: false, loadingGoogle: false, loadingFacebook: false };
+      break;
+    case SAVE_TOKENS:
+      newState = {
+        ...state,
+        // accessToken: action.payload.accessToken,
+        // client: action.payload.client,
+        email: action.payload.email,
+        uid: action.payload.uid
+      };
+      break;
     case FETCHING_CONTACTS:
       newState = { ...state, isFetchingContacts: true };
       break;
@@ -44,19 +75,6 @@ export default function appReducer(state = initialState, action) {
         ...state,
         profiles: action.payload,
         isFetchingProfiles: false
-      };
-      break;
-    case LOGGING_IN:
-      break;
-    case LOGIN_SUCCESS:
-      newState = { ...state, user: action.payload };
-      break;
-    case SAVE_TOKENS:
-      newState = {
-        ...state,
-        accessToken: action.payload.accessToken,
-        client: action.payload.client,
-        uid: action.payload.uid
       };
       break;
     case SAVE_GROUPS:

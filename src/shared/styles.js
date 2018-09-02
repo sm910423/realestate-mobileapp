@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const primaryColor = "#0C479D";
+export const primaryColor = "#1fb35b";
 export const accentColor = "#cc3333";
 export const blueColor = "#3389ee";
 
@@ -21,6 +21,15 @@ export const sharedStyles = StyleSheet.create({
   flexOne: {
     flex: 1
   },
+  titleViewStyle: {
+    marginTop: 24
+  },
+  titleTextStyle: {
+    fontFamily: "Cochin-Bold",
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#1fb35b"
+  },
   roundedCorners: {
     borderRadius: 5
   },
@@ -28,10 +37,8 @@ export const sharedStyles = StyleSheet.create({
     flex: 1,
     marginTop: 16,
     padding: 16,
+    backgroundColor: "transparent",
     elevation: 4
-  },
-  paperFooterText: {
-    margin: 16
   },
   footerButton: {
     marginLeft: 8,

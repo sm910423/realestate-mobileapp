@@ -1,0 +1,32 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'YeomanApp' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
+
+  # Pods for YeomanApp
+  pod 'GoogleSignIn'
+  pod 'FBSDKCoreKit', '4.35'
+  pod 'FBSDKLoginKit', '4.35'
+  pod 'FBSDKShareKit', '4.35'
+  
+  target 'YeomanApp-tvOSTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'YeomanAppTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
+
+target 'YeomanApp-tvOS' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
+
+  # Pods for YeomanApp-tvOS
+
+end

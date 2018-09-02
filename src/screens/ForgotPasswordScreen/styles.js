@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
       backgroundColor: "#F5F6F7"
   },
   subTitleViewStyle: {
-    marginTop: 32,
+    marginTop: 0,
     marginBottom: 28
   },
   subTitleTextStyle: {

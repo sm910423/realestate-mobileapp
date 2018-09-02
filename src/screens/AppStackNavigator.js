@@ -16,6 +16,7 @@ import SplashScreen from 'react-native-splash-screen';
 import WalkThroughScreen from "./WalkThroughScreen";
 import LoginScreen from "./LoginScreen";
 import RegisterScreen from "./RegisterScreen";
+import ForgotPasswordScreen from "./ForgotPasswordScreen";
 import MainScreen from "./MainScreen";
 import ChatScreen from "./ChatScreen";
 
@@ -29,6 +30,9 @@ const AppStackNavigator = StackNavigator(
     },
     Register: {
       screen: RegisterScreen
+    },
+    Forgot: {
+      screen: ForgotPasswordScreen
     },
     App: {
       screen: MainScreen
