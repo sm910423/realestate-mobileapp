@@ -5,6 +5,9 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   SAVE_TOKENS,
+  SENDING_RESET_EMAIL,
+  SEND_RESET_EMAIL_SUCCESS,
+  SEND_RESET_EMAIL_FAILURE,
   FETCHING_CONTACTS,
   FETCH_CONTACTS_SUCCESS,
   FETCHING_PROFILES,
@@ -21,6 +24,7 @@ const initialState = {
   // client: "",
   email: "",
   uid: "",
+  loadingCode: false,
   contacts: [],
   isFetchingContacts: false,
   profiles: [],
@@ -56,6 +60,15 @@ export default function appReducer(state = initialState, action) {
         email: action.payload.email,
         uid: action.payload.uid
       };
+      break;
+    case SENDING_RESET_EMAIL:
+      newState = { ...state, loadingCode: true };
+      break;
+    case SEND_RESET_EMAIL_SUCCESS:
+      newState = { ...state, loadingCode: false };
+      break;
+    case SEND_RESET_EMAIL_FAILURE:
+      newState = { ...state, loadingCode: false };
       break;
     case FETCHING_CONTACTS:
       newState = { ...state, isFetchingContacts: true };

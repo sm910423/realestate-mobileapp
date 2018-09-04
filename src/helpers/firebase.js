@@ -91,3 +91,12 @@ export const fbFacebookLogin = (callback) => {
         callback({ status: 'error', message: error.toString() });
     });
 }
+
+export const fbResetEmailSend = (email, callback) => {
+    firebase.auth().sendPasswordResetEmail(email).then(result => {
+        console.log("send password reset email", result);
+        callback({ status: 'success' });
+    }).catch(error => {
+        callback({ status: 'error', message: error.toString() });
+    });
+}

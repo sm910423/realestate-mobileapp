@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -39,6 +40,7 @@
 		30EF6653B1A6482C876BBE01 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2AED16B44D724321BE46FB1E /* Ionicons.ttf */; };
 		444D76CA68C74E3885B217B3 /* libRNDocumentPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E78AB57BC1A44888B7B1FE6 /* libRNDocumentPicker.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
+		6127FD71FAD64037BF03E2A0 /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1846B0A7A8C40A187EE350E /* libRCTFBSDK.a */; };
 		675F2C0107C3453C92A3039E /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7EC946CFEE4E33B953A121 /* libSplashScreen.a */; };
 		68220C77640F480B8E61E2BC /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1582115F17E9403AB1AE4E3D /* AddressBook.framework */; };
 		7466BCB02B3347839E900529 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 32F66FF1859C496CB154D33B /* SimpleLineIcons.ttf */; };
@@ -62,7 +64,6 @@
 		DBE742F6F0B441A09F313F96 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E42B8DAE10E4D2082D289DE /* MaterialIcons.ttf */; };
 		E2A6B79A5A7B4D2D84FAA844 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44A78202E9AD4536B74491C6 /* SystemConfiguration.framework */; };
 		ECD331A87DAC486180128209 /* libRNGoogleSignin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89697CE30C1C4436BC5DD96A /* libRNGoogleSignin.a */; };
-		6127FD71FAD64037BF03E2A0 /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1846B0A7A8C40A187EE350E /* libRCTFBSDK.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -367,6 +368,13 @@
 			remoteGlobalIDString = 9FD355121D3E4A2900D06170;
 			remoteInfo = RNGoogleSignin;
 		};
+		C5B24E5E213E332800BFB240 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 527BE90F76AD447B904F7882 /* RCTFBSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9350E0F11CE3B0920041D815;
+			remoteInfo = RCTFBSDK;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -406,6 +414,7 @@
 		44A78202E9AD4536B74491C6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		4EACE8D788EC48B89232F3AA /* RNDocumentPicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNDocumentPicker.xcodeproj; path = "../node_modules/react-native-document-picker/ios/RNDocumentPicker.xcodeproj"; sourceTree = "<group>"; };
 		51CA7B152969A4130E936CC1 /* Pods-YeomanAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeomanAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YeomanAppTests/Pods-YeomanAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		527BE90F76AD447B904F7882 /* RCTFBSDK.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDK.xcodeproj; path = "../node_modules/react-native-fbsdk/ios/RCTFBSDK.xcodeproj"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		66C8E691E2CC4A7780131593 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -424,6 +433,7 @@
 		C5EB24DB2135A5790008DD50 /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splash.png; path = ../src/assets/images/splash.png; sourceTree = "<group>"; };
 		C5EB24DE2135A7DF0008DD50 /* LaunchScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		C8004993BBA7983B2D51B52F /* libPods-YeomanApp-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YeomanApp-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1846B0A7A8C40A187EE350E /* libRCTFBSDK.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTFBSDK.a; sourceTree = "<group>"; };
 		D403184E6DA84DD7B886F9E4 /* SafariServices.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		D7F6C0C7BE814655B8D978F3 /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SplashScreen.xcodeproj; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; };
 		DF9144BCA26E42448FA1DA8D /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
@@ -433,8 +443,6 @@
 		F355DE876B27669364558FBC /* libPods-YeomanAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YeomanAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA854116B29AC0F3B9A5C56D /* Pods-YeomanApp-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeomanApp-tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YeomanApp-tvOS/Pods-YeomanApp-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		FCC56064BA2F3506DE0BC1C3 /* Pods-YeomanApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeomanApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-YeomanApp/Pods-YeomanApp.release.xcconfig"; sourceTree = "<group>"; };
-		527BE90F76AD447B904F7882 /* RCTFBSDK.xcodeproj */ = {isa = PBXFileReference; name = "RCTFBSDK.xcodeproj"; path = "../node_modules/react-native-fbsdk/ios/RCTFBSDK.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		D1846B0A7A8C40A187EE350E /* libRCTFBSDK.a */ = {isa = PBXFileReference; name = "libRCTFBSDK.a"; path = "libRCTFBSDK.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -767,6 +775,7 @@
 				DF9144BCA26E42448FA1DA8D /* libRNVectorIcons.a */,
 				EC7EC946CFEE4E33B953A121 /* libSplashScreen.a */,
 				89697CE30C1C4436BC5DD96A /* libRNGoogleSignin.a */,
+				D1846B0A7A8C40A187EE350E /* libRCTFBSDK.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -799,6 +808,14 @@
 			isa = PBXGroup;
 			children = (
 				C574E674213A1AAB004EECEB /* libRNGoogleSignin.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C5B24E5B213E332800BFB240 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C5B24E5F213E332800BFB240 /* libRCTFBSDK.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -896,6 +913,10 @@
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = PD4397C6L5;
+						ProvisioningStyle = Automatic;
+					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
@@ -930,6 +951,10 @@
 				{
 					ProductGroup = ADBDB9201DFEBF0600ED6528 /* Products */;
 					ProjectRef = ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */;
+				},
+				{
+					ProductGroup = C5B24E5B213E332800BFB240 /* Products */;
+					ProjectRef = 527BE90F76AD447B904F7882 /* RCTFBSDK.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302B61ABCB90400DB3ED1 /* Products */;
@@ -1282,6 +1307,13 @@
 			remoteRef = C574E673213A1AAB004EECEB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		C5B24E5F213E332800BFB240 /* libRCTFBSDK.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTFBSDK.a;
+			remoteRef = C5B24E5E213E332800BFB240 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1581,8 +1613,11 @@
 			baseConfigurationReference = 9ECE5313E776F6DBE946714D /* Pods-YeomanApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = PD4397C6L5;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-document-picker/ios/RNDocumentPicker",
@@ -1601,6 +1636,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.yeoman;
 				PRODUCT_NAME = YeomanApp;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1610,7 +1647,10 @@
 			baseConfigurationReference = FCC56064BA2F3506DE0BC1C3 /* Pods-YeomanApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PD4397C6L5;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-document-picker/ios/RNDocumentPicker",
@@ -1629,6 +1669,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.yeoman;
 				PRODUCT_NAME = YeomanApp;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

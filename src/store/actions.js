@@ -13,6 +13,9 @@ export const LOGGING_IN_BY_GOOGLE = "LOGGING_IN_BY_GOOGLE";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 export const SAVE_TOKENS = "SAVE_TOKENS";
+export const SENDING_RESET_EMAIL = "SENDING_RESET_EMAIL";
+export const SEND_RESET_EMAIL_SUCCESS = "SEND_RESET_EMAIL_SUCCESS";
+export const SEND_RESET_EMAIL_FAILURE = "SEND_RESET_EMAIL_FAILURE";
 
 export const FETCHING_CONTACTS = "FETCH_CONTACTS";
 export const FETCH_CONTACTS_SUCCESS = "FETCH_CONTACTS_SUCCESS";
@@ -111,6 +114,25 @@ export function signupAction(signupData) {
     }
   };
 }
+
+export function sendResetEmailAction(sendingData) {
+  return async function(dispatch) {
+    dispatch({ type: SENDING_RESET_EMAIL });
+
+    fb.fbResetEmailSend(sendingData.email, result => {
+      if (result.status === 'success') {
+        dispatch({ type: SEND_RESET_EMAIL_SUCCESS });
+        alert.showToastMessage('Please check your email.');
+      } else {
+        dispatch({ type: SEND_RESET_EMAIL_FAILURE });
+        alert.showErrorMessage(result.message);
+      }
+    });
+  };
+}
+
+
+
 
 export function fetchContactsAction() {
   return async function(dispatch) {

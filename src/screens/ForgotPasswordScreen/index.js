@@ -1,11 +1,5 @@
 import React, { Component } from "react";
-import {
-  Platform,
-  View,
-  ScrollView,
-  ToastAndroid,
-  AlertIOS
-} from "react-native";
+import { View, ScrollView } from "react-native";
 import { Text, withTheme } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import ButtonComponent from "../../Components/ButtonComponent";
@@ -14,8 +8,9 @@ import { connect } from "react-redux";
 
 import { sharedStyles } from "../../shared/styles";
 import styles from "./styles";
-import * as Api from "../../config/api";
-import { fetchContactsAction, loginAction } from "./../../store/actions";
+import * as alert from "../../helpers/alert";
+
+import { sendResetEmailAction } from "./../../store/actions";
 
 
 class ForgotPasswordScreen extends Component {
@@ -39,8 +34,7 @@ class ForgotPasswordScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      loading: false
+      email: ""
     };
   }
 
@@ -50,25 +44,16 @@ class ForgotPasswordScreen extends Component {
     );
   };
 
-  login = () => {
+  sendResetEmail = () => {
     if (this.validCredentials()) {
-      this.setState({ loading: true });
-      this.props.login({
-        email: this.state.email,
-        password: this.state.password
-      });
+      this.props.sending({ email: this.state.email });
     } else {
-      this.alertUser("Please fill in all fields", "Error");
+      alert.showErrorMessage("Please fill in email field", "Error");
     }
   };
 
-  alertUser = (message, iosTitle) => {
-    if (Platform.OS === "ios") {
-      AlertIOS.alert(iosTitle, message);
-    } else {
-      ToastAndroid.show(message, ToastAndroid.SHORT);
-    }
-  };
+  /* verifyCode = () => {
+  } */
 
   render() {
     return (
@@ -82,29 +67,33 @@ class ForgotPasswordScreen extends Component {
 
           <View style={{height: 8}} />
 
-          <ButtonComponent text="Send Verification Code" onPress={this.register} loading={this.state.loading} />
+          <ButtonComponent text="Send Email" onPress={this.sendResetEmail.bind(this)} loading={this.state.loading} />
 
           <View style={{height: 8}} />
 
-          <RoundTextInputComponent label="Verification Code" value={this.state.code} placeholder="Enter Verification Code" onChangeText={text => this.setState({ code: text })} />
+          {/* <RoundTextInputComponent label="Verification Code" value={this.state.code} placeholder="Enter Verification Code" onChangeText={text => this.setState({ code: text })} />
           <RoundTextInputComponent label="New Password" value={this.state.password} placeholder="Enter New Password" onChangeText={text => this.setState({ password: text })} />
           <RoundTextInputComponent label="Confirm Password" value={this.state.confirm} placeholder="Confirm Password" onChangeText={text => this.setState({ confirm: text })} />
 
           <View style={{height: 8}} />
 
-          <ButtonComponent text="Submit" onPress={this.register} loading={this.state.loading} />
+          <ButtonComponent text="Submit" onPress={this.verifyCode.bind(this)} loading={this.state.loading} />
 
-          <View style={{height: 8}} />
+          <View style={{height: 8}} /> */}
         </View>
       </ScrollView>
     );
   };
 }
 
+const mapStateToProps = state => ({
+  loadingEmail: state.app.loadingCode,
+})
+
 const mapDispatchToProps = dispatch => ({
-  login: loginData => {
-    dispatch(loginAction(loginData));
+  sending: sendingData => {
+    dispatch(sendResetEmailAction(sendingData));
   }
 });
 
-export default connect(null, mapDispatchToProps)(withTheme(ForgotPasswordScreen));
+export default connect(mapStateToProps, mapDispatchToProps)(withTheme(ForgotPasswordScreen));
