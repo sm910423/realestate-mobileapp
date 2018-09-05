@@ -38,7 +38,7 @@ export const sharedStyles = StyleSheet.create({
     marginTop: 16,
     padding: 16,
     backgroundColor: "transparent",
-    elevation: 4
+    elevation: 4,
   },
   footerButton: {
     marginLeft: 8,

@@ -42,16 +42,6 @@ class LoginScreen extends Component {
   loginByEmail = () => {
     if (this.validCredentials()) {      
       this.props.login({ email: this.state.email, password: this.state.password, method: 'email' });
-
-      // fb.fbEmailLogin(this.state.email, this.state.password, (result) => {
-      //   if (result.status === 'success') {
-      //     // result.data.user.email, .uid
-      //     this.props.navigation.navigate("App");
-      //   } else {
-      //     this.setState({ loadingEmail: false });
-      //     this.alertUser("Error", result.message);
-      //   }
-      // });
     }
   };
 

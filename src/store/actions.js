@@ -31,40 +31,19 @@ export function loginAction(loginData) {
       dispatch({ type: LOGGING_IN_BY_EMAIL });
 
       fb.fbEmailLogin(loginData.email, loginData.password, result => {
-        if (result.status === 'success') {
-          dispatch(NavigationActions.navigate({ routeName: "App" }));
-          dispatch({ type: LOGIN_SUCCESS, payload: { email: result.data.user.email, uid: result.data.user.uid } });
-          dispatch({ type: SAVE_TOKENS, payload: { email: result.data.user.email, uid: result.data.user.uid } });
-        } else {
-          dispatch({ type: LOGIN_FAILURE });
-          alert.showErrorMessage(result.message);
-        }
+        afterLogin(dispatch, result);
       });
     } else if (loginData.method === 'google') {
       dispatch({ type: LOGGING_IN_BY_GOOGLE });
 
       fb.fbGoogleLogin(result => {
-        if (result.status === 'success') {
-          dispatch(NavigationActions.navigate({ routeName: "App" }));
-          dispatch({ type: LOGIN_SUCCESS, payload: { email: result.data.user.email, uid: result.data.user.uid } });
-          dispatch({ type: SAVE_TOKENS, payload: { email: result.data.user.email, uid: result.data.user.uid } });
-        } else {
-          dispatch({ type: LOGIN_FAILURE });
-          alert.showErrorMessage(result.message);
-        }
+        afterLogin(dispatch, result);
       });
     } else if (loginData.method === 'facebook') {
       dispatch({ type: LOGGING_IN_BY_FACEBOOK });
 
       fb.fbFacebookLogin(result => {
-        if (result.status === 'success') {
-          dispatch(NavigationActions.navigate({ routeName: "App" }));
-          dispatch({ type: LOGIN_SUCCESS, payload: { email: result.data.user.email, uid: result.data.user.uid } });
-          dispatch({ type: SAVE_TOKENS, payload: { email: result.data.user.email, uid: result.data.user.uid } });
-        } else {
-          dispatch({ type: LOGIN_FAILURE });
-          alert.showErrorMessage(result.message);
-        }
+        afterLogin(dispatch, result);
       });
     }
   };
@@ -76,40 +55,19 @@ export function signupAction(signupData) {
       dispatch({ type: LOGGING_IN_BY_EMAIL });
 
       fb.fbEmailSignup(signupData.email, signupData.password, signupData.firstname, signupData.lastname, result => {
-        if (result.status === 'success') {
-          dispatch(NavigationActions.navigate({ routeName: "App" }));
-          dispatch({ type: LOGIN_SUCCESS, payload: { email: result.data.user.email, uid: result.data.user.uid } });
-          dispatch({ type: SAVE_TOKENS, payload: { email: result.data.user.email, uid: result.data.user.uid } });
-        } else {
-          dispatch({ type: LOGIN_FAILURE });
-          alert.showErrorMessage(result.message);
-        }
+        afterLogin(dispatch, result);
       });
     } else if (signupData.method === 'google') {
       dispatch({ type: LOGGING_IN_BY_GOOGLE });
 
       fb.fbGoogleLogin(result => {
-        if (result.status === 'success') {
-          dispatch(NavigationActions.navigate({ routeName: "App" }));
-          dispatch({ type: LOGIN_SUCCESS, payload: { email: result.data.user.email, uid: result.data.user.uid } });
-          dispatch({ type: SAVE_TOKENS, payload: { email: result.data.user.email, uid: result.data.user.uid } });
-        } else {
-          dispatch({ type: LOGIN_FAILURE });
-          alert.showErrorMessage(result.message);
-        }
+        afterLogin(dispatch, result);
       });
     } else if (signupData.method === 'facebook') {
       dispatch({ type: LOGGING_IN_BY_FACEBOOK });
 
       fb.fbFacebookLogin(result => {
-        if (result.status === 'success') {
-          dispatch(NavigationActions.navigate({ routeName: "App" }));
-          dispatch({ type: LOGIN_SUCCESS, payload: { email: result.data.user.email, uid: result.data.user.uid } });
-          dispatch({ type: SAVE_TOKENS, payload: { email: result.data.user.email, uid: result.data.user.uid } });
-        } else {
-          dispatch({ type: LOGIN_FAILURE });
-          alert.showErrorMessage(result.message);
-        }
+        afterLogin(dispatch, result);
       });
     }
   };
@@ -131,6 +89,22 @@ export function sendResetEmailAction(sendingData) {
   };
 }
 
+function afterLogin(dispatch, result) {
+  if (result.status === 'success') {
+    // dispatch(NavigationActions.navigate({ routeName: "App" }));
+    dispatch(NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: "App" })
+      ]
+    }));
+    dispatch({ type: LOGIN_SUCCESS, payload: { uid: result.data } });
+    // dispatch({ type: SAVE_TOKENS, payload: { uid: result.data } });
+  } else {
+    dispatch({ type: LOGIN_FAILURE });
+    alert.showErrorMessage(result.message);
+  }
+}
 
 
 

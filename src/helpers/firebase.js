@@ -3,12 +3,15 @@ import Firebase from 'firebase';
 import * as GoogleSignin from 'react-native-google-signin';
 import * as FBSDK from 'react-native-fbsdk';
 
+const usersRef = firebase.database().ref('users');
+
 export const fbEmailSignup = (email, password, firstname, lastname, callback) => {
     firebase.auth().createUserWithEmailAndPassword(email, password).then(credential => {
         if (credential) {
-            callback({status: 'success', data: credential});
+            fbUserInfoSave({ firstname, lastname, email, uid: credential.user.uid });
+            callback({ status: 'success', data: credential.user.uid });
         } else {
-            callback({status: 'error', message: "ERROR"});
+            callback({ status: 'error', message: "ERROR" });
         }
     }).catch(e => callback({status: 'error', message: e.toString()}));
 }
@@ -16,26 +19,21 @@ export const fbEmailSignup = (email, password, firstname, lastname, callback) =>
 export const fbEmailLogin = (email, password, callback) => {
     firebase.auth().signInWithEmailAndPassword(email, password).then(credential => {
         if (credential) {
-            console.log("firebase login result", credential);
-            callback({status: 'success', data: credential});
+            // console.log("firebase login result", credential);
+            callback({ status: 'success', data: credential.user.uid });
         } else {
-            callback({status: 'error', message: "ERROR"});
+            callback({ status: 'error', message: "ERROR" });
         }
     }).catch(e => callback({status: 'error', message: e.toString()}));
 };
 
 export const fbGoogleLogin = (callback) => {
-    // const provider = Firebase.auth.GoogleAuthProvider;
-    // provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-    // provider.addScope('https://www.googleapis.com/auth/plus.login');
-    // console.log(provider);
-    
     const loginWithUserCredential = (data) => {
         const credential = Firebase.auth.GoogleAuthProvider.credential(data.idToken, data.accessToken);
-    
+        
         firebase.auth().signInAndRetrieveDataWithCredential(credential).then(result => {
-            console.log("firebase login result", result);
-            callback({ status: 'success', data: result });
+            fbUserInfoSave({ firstname: data.user.givenName, lastname: data.user.familyName, email: data.user.email, uid: result.user.uid, picture: data.user.photo })
+            callback({ status: 'success', data: result.user.uid });
         }).catch((error) => { 
             callback({ status: 'error', message: error.toString() });
         });
@@ -73,10 +71,15 @@ export const fbFacebookLogin = (callback) => {
                 if (credential) {
                     firebase.auth().signInAndRetrieveDataWithCredential(credential).then(user => {
                         console.log("firebase login result", user);
-                        const email = user.additionalUserInfo.profile.email;
-                        //profile.first_name, last_name
-                        user.user.email = email;
-                        callback({ status: 'success', data: user });
+                        const info = user.additionalUserInfo.profile;
+
+                        let picture = null;
+                        if (info.picture && info.picture.data && info.picture.data.url) {
+                            picture = info.picture.data.url;
+                        }
+                        
+                        fbUserInfoSave({ firstname: info.first_name, lastname: info.last_name, email: info.email, uid: user.user.uid, picture });
+                        callback({ status: 'success', data: user.user.uid });
                     }).catch(error => {
                         callback({ status: 'error', message: error.toString() });
                     })
@@ -98,5 +101,26 @@ export const fbResetEmailSend = (email, callback) => {
         callback({ status: 'success' });
     }).catch(error => {
         callback({ status: 'error', message: error.toString() });
+    });
+}
+
+export const fbUserInfoSave = async (info) => {
+    let result = await fbGetUserInfo(info.uid);
+
+    if (result) {
+    } else {
+        let newUserRef = usersRef.push();
+        newUserRef.set(info);
+        // console.log(newUserRef.toString());
+    }
+}
+
+export const fbGetUserInfo = (uid) => {
+    return new Promise((resolve, reject) => {
+        usersRef.orderByChild('uid').equalTo(uid).on('value', (result) => {
+            resolve(result.val());
+        }, (error) => {
+            reject(error);
+        });
     });
 }

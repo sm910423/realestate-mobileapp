@@ -20,10 +20,7 @@ const initialState = {
   loadingEmail: false,
   loadingFacebook: false,
   loadingFacebook: false,
-  // accessToken: "",
-  // client: "",
-  email: "",
-  uid: "",
+  userid: "",
   loadingCode: false,
   contacts: [],
   isFetchingContacts: false,
@@ -47,19 +44,13 @@ export default function appReducer(state = initialState, action) {
       newState = { ...state, loadingGoogle: true}
       break;
     case LOGIN_SUCCESS:
-      newState = { ...state, user: action.payload, loadingEmail: false, loadingGoogle: false, loadingFacebook: false };
+      newState = { ...state, userid: action.payload.uid, loadingEmail: false, loadingGoogle: false, loadingFacebook: false };
       break;
     case LOGIN_FAILURE:
       newState = { ...state, loadingEmail: false, loadingGoogle: false, loadingFacebook: false };
       break;
     case SAVE_TOKENS:
-      newState = {
-        ...state,
-        // accessToken: action.payload.accessToken,
-        // client: action.payload.client,
-        email: action.payload.email,
-        uid: action.payload.uid
-      };
+      newState = { ...state, email: action.payload.email, uid: action.payload.uid };
       break;
     case SENDING_RESET_EMAIL:
       newState = { ...state, loadingCode: true };

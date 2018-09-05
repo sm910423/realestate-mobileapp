@@ -1,15 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {
-  StackNavigator,
-  TabNavigator,
-  addNavigationHelpers
-} from "react-navigation";
+import { StackNavigator, TabNavigator, addNavigationHelpers } from "react-navigation";
 import { StatusBar, View } from "react-native";
-import {
-  createReduxBoundAddListener,
-  createReactNavigationReduxMiddleware
-} from "react-navigation-redux-helpers";
+import { createReduxBoundAddListener, createReactNavigationReduxMiddleware } from "react-navigation-redux-helpers";
 
 import SplashScreen from 'react-native-splash-screen';
 
@@ -18,7 +11,6 @@ import LoginScreen from "./LoginScreen";
 import RegisterScreen from "./RegisterScreen";
 import ForgotPasswordScreen from "./ForgotPasswordScreen";
 import MainScreen from "./MainScreen";
-import ChatScreen from "./ChatScreen";
 
 const AppStackNavigator = StackNavigator(
   {
@@ -36,12 +28,10 @@ const AppStackNavigator = StackNavigator(
     },
     App: {
       screen: MainScreen
-    },
-    Chat: {
-      screen: ChatScreen
     }
   },
   { initialRouteName: "WalkThrough" }
+  // { initialRouteName: "App" }
 );
 
 const middleware = createReactNavigationReduxMiddleware(
@@ -62,7 +52,7 @@ class AppWithNavigationState extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <StatusBar backgroundColor="#0A3F8D" barStyle="light-content" />
+        <StatusBar barStyle="default" />
         <AppStackNavigator
           navigation={addNavigationHelpers({
             dispatch: this.props.dispatch,
